@@ -394,7 +394,7 @@ function actCreateAppFiles(){
 
 
     // create config.json
-    var configjson = require(__dirname+"/../../config.tpl.json") ;
+    var configjson = require(this.options.dir+"/node_modules/opencomb/config.tpl.json") ;
     configjson.db.username = answers.dbusername ;
     configjson.db.password = answers.dbpassword ;
     configjson.server.port = answers.httpport ;

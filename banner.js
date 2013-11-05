@@ -6,5 +6,5 @@ module.exports =
     + "| |__| | |_| |  __/ | | | |___| |_| | | | | | | |_| |\n"
     + " \\____/| .__/ \\___|_| |_|\\_____\\___/|_| |_| |_|_.__/ \n"
     + "       | |                                           \n"
-    + "       |_|                           version %version%   \n"
-    .replace("%version%",require("../package.json").version) ;
+    + "       |_|                       cli version %version%   \n"
+    .replace("%version%",require("./package.json").version) ;

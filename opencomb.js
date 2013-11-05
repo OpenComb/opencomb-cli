@@ -3,7 +3,7 @@
 require("colors") ;
 require('./patchs.js') ;
 var cli = require("cli") ;
-var pkginfo = require("../package.json") ;
+var pkginfo = require("./package.json") ;
 var Steps = require("ocsteps") ;
 
 
@@ -64,7 +64,3 @@ cli.main(function(args,opts){
     })
     .bind(this) () ;
 }) ;
-
-
-
-
