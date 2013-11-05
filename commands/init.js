@@ -198,10 +198,10 @@ function actDoQuestions(versions) {
 
 	    // step 7
 	    , {
-		message: "Install extensions as repositor(Git) work dir"
+		message: "Install extensions as repository(Git) work dir"
 		, type: "confirm"
 		, name: "as-repo-workdir"
-		, "default": this.options["as-repo-workdir"]
+		, "default": !!this.options["as-repo-workdir"]
 	    }
 
 	]
@@ -308,6 +308,8 @@ function actInstallPackagesViaNPM() {
     var argv = [ 
 	require.resolve('repo-npm/bin/npm-cli.js')
 	, "install"
+	//, "--loglevel"
+	//, "verbose"
     ] ;
     var options = {
 	cwd: this.options.dir
@@ -320,8 +322,12 @@ function actInstallPackagesViaNPM() {
     else
 	argv.push('git+https://github.com/OpenComb/OpenComb.git#'+answers.ocversion.version) ;
 
+    // distro
+    if(this.options.distro){
+	argv.push(this.options.distro) ;
+    }
+
     // as repo workdirs
-    console.log( answers ) ;
     if( answers["as-repo-workdir"] && answers.asrepos && answers.asrepos.length ){
 	argv = argv.concat("--as-repo-workdir",answers.asrepos) ;
     }
