@@ -1,0 +1,7 @@
+node_modules
+.DS_Store
+bin
+compiled
+public/files
+log
+test*.js
