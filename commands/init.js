@@ -201,7 +201,7 @@ function actDoQuestions(versions) {
 		message: "Install extensions as repository(Git) work dir"
 		, type: "confirm"
 		, name: "as-repo-workdir"
-		, "default": this.options["as-repo-workdir"]
+		, "default": !!this.options["as-repo-workdir"]
 	    }
 
 	]
