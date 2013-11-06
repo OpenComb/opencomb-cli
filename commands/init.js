@@ -1,10 +1,11 @@
 var inquirer = require("inquirer") ;
-var urllib = require('urllib') ;
 var fs = require('fs') ;
 var childprocess = require('child_process') ;
 var rimraf = require('rimraf') ;
 var util = require('util') ;
 var path = require('path') ;
+var https = require('https') ;
+var url = require('url') ;
 var rbower = require('rbower') ;
 
 
@@ -43,32 +44,20 @@ function actCollectionVersionInfo(){
     var spinner = waiting("Collecting versions information from npmjs.org and github.com") ;
 
     // npm versions
-    urllib.request(
+    getJson(
 	"https://registry.npmjs.org/opencomb"
-	, {
-	    dataType: 'json'
-	    , timeout: 30000
-	}
 	, this.holdButThrowError('-','npminfo')
     ) ;
 
     // github tags
-    urllib.request(
+    getJson(
 	"https://api.github.com/repos/OpenComb/OpenComb/tags"
-	, {
-	    dataType: 'json'
-	    , timeout: 30000
-	}
 	, this.holdButThrowError('-','githubtags')
     ) ;
 
     // github branches
-    urllib.request(
+    getJson(
 	"https://api.github.com/repos/OpenComb/OpenComb/branches"
-	, {
-	    dataType: 'json'
-	    , timeout: 30000
-	}
 	, this.holdButThrowError('-','githubbranches')
     ) ;
 
@@ -249,13 +238,8 @@ function actSelectedRepoWorkdir(answers){
 	console.log('') ;
 	var spinner = waiting("Fetching dependencies of this verion opencomb from github.com") ;
 
-	urllib.request(
-	    url
-	    , {
-		dataType:"json"
-		, timeout: 30000
-	    }
-	    , this.holdButThrowError(function(err,json,res){
+	getJson(
+	    url, this.holdButThrowError(function(err,json,res){
 
 		spinner.done() ;
 
@@ -465,4 +449,52 @@ function waiting(msg) {
 	    spinnerInterval && clearInterval(spinnerInterval);
 	}
     }
+}
+
+
+
+function get(u,cb) {
+
+    var u = url.parse(u) ;
+    var options = {
+	hostname: u.hostname
+	, path: u.path + (u.search||'')
+    }
+    options.agent = new https.Agent(options) ;
+    options.agent.rejectUnauthorized = false ;
+
+    https.get(options,function(res){
+	var body = '' ;
+	res.on("data",function(buff){
+	    body+= buff.toString() ;
+	}) ;
+	res.on('end',function(res){
+	    cb && cb (null,body) ;
+	}) ;
+    })
+    .on('error',function(err){
+	if(err){
+	    cb && cb (err) ;
+	    return ;
+	}
+    }) ;
+}
+
+function getJson(u,cb) {
+    get(u,function(err,body){
+	if(err){
+	    cb && cb(err) ;
+	    return ;
+	}
+	
+	try{
+	    var json ;
+	    eval( "json="+(body||"{}") ) ;
+	} catch(err) {
+	    cb && cb (err) ;
+	    return ;
+	}
+
+	cb && cb (null,json) ;
+    }) ;
 }

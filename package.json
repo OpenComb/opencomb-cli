@@ -23,7 +23,6 @@
     "ocsteps": "0.2.21",
     "colors": "~0.6.2",
     "inquirer": "~0.3.4",
-    "urllib": "~0.5.3",
     "repo-npm": "0.0.3",
     "rimraf": "~2.2.2",
     "rbower": "0.0.1",
