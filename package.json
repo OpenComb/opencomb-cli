@@ -1,6 +1,6 @@
 {
   "name": "opencomb-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The command line interface tools of OpenComb",
   "main": "banner.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenComb/opencomb-cli.git#0.1.1"
+    "url": "git+https://github.com/OpenComb/opencomb-cli.git#0.1.2"
   },
   "author": "alee chou",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "ocsteps": "0.2.21",
     "colors": "~0.6.2",
     "inquirer": "~0.3.4",
-    "urllib": "~0.5.3",
     "repo-npm": "0.0.3",
     "rimraf": "~2.2.2",
     "rbower": "0.0.1",
