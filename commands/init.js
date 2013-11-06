@@ -480,7 +480,17 @@ function get(u,cb) {
     }) ;
 }
 
+
+var cli = require('cli') ;
+var mockupdata = require("../mockup.js") ;
+
 function getJson(u,cb) {
+
+    if( cli.options['dbg-httpget-mockup'] && mockupdata[u] ){
+	cb && cb (null,mockupdata[u]) ;
+	return ;
+    }
+
     get(u,function(err,body){
 	if(err){
 	    cb && cb(err) ;
