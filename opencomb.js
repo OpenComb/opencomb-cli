@@ -41,7 +41,7 @@ cli.parse(
 	"dir": ['d', "Which dir you want to install an opencomb application.","path",process.cwd()]
 	, "distro": ["distro","Install a extension as a OpenComb application distro.","string"]
 	, "as-repo-workdir": ['R',"Install extensions as a repository(Git) workdir."]
-	, "dbg-urllib-mockup": ['dm',"Use locale mockup data instead fetch package information from remote repositories."]
+	, "dbg-httpget-mockup": ['dm',"Use locale mockup data instead fetch package information from remote repositories."]
 	, "dbg-clear-here-first": ['dc',"Clear target dir before installition."]
 	, "dgb-dont-really-install-packages": ['ddi',"You do not need this, but i need."]
     }
