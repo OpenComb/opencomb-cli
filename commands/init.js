@@ -459,9 +459,8 @@ function get(u,cb) {
     var options = {
 	hostname: u.hostname
 	, path: u.path + (u.search||'')
+	, rejectUnauthorized: false
     }
-    options.agent = new https.Agent(options) ;
-    options.agent.rejectUnauthorized = false ;
 
     https.get(options,function(res){
 	var body = '' ;
